@@ -1,4 +1,4 @@
-package com.selsup.api.selsuptesttask.controller;
+package com.selsup.api.selsuptesttask.api;
 
 import com.selsup.api.selsuptesttask.dto.DocumentDto;
 import com.selsup.api.selsuptesttask.mapper.DocumentMapper;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/api/v3/lk/documents")
-public class DocumentApi {
+public class CrptApi {
 
     private final DocumentService documentService;
     private final SignatureService signatureService;
@@ -21,11 +21,11 @@ public class DocumentApi {
     private final Semaphore semaphore;
     private final long requestInterval;
 
-    public DocumentApi(DocumentService documentService,
-                       SignatureService signatureService,
-                       DocumentMapper mapper,
-                       Semaphore semaphore,
-                       long requestInterval) {
+    public CrptApi(DocumentService documentService,
+                   SignatureService signatureService,
+                   DocumentMapper mapper,
+                   Semaphore semaphore,
+                   long requestInterval) {
         this.documentService = documentService;
         this.signatureService = signatureService;
         this.mapper = mapper;
@@ -49,8 +49,6 @@ public class DocumentApi {
             }
 
             documentService.createDocument(mapper.mapDtoDocumentToEntity(document));
-
-            // Здесь логика обработки документа
 
             return ResponseEntity.ok("Document processed successfully");
 
